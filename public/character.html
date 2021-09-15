@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>character</title>
+</head>
+<body>
+
+    <div id="cube" style="height: 25px; width: 25px; background-color: palevioletred; border-radius: 10px;"></div>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        var socket = io();
+        const cube =   document.getElementById("cube")
+        socket.on('control', function(msg) {
+            var posLeft = cube.offsetLeft;
+            var posTop = cube.offsetTop;
+
+            if (msg == "up"){
+                console.log("up");
+             cube.style.marginTop  = (posTop-10)+"px";
+
+            }else if (msg == "down"){
+                console.log("down");
+                cube.style.marginTop  = (posTop+10)+"px";
+
+            }else if (msg == "left"){
+                console.log("left");
+                cube.style.marginLeft  = (posLeft-20)+"px";
+            }else if (msg == "right"){
+                console.log("right");
+                cube.style.marginLeft  = (posLeft+10)+"px";
+            }
+         });
+
+    </script>
+
+</body>
+</html>
