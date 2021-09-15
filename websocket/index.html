@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>controller</title>
+</head>
+<body >
+    <div id="center">
+        <a id="up" onclick="up();" class="button6">↑</a>
+        <a id="left" onclick="left();" class="button6">←</a>
+        <a id="right" onclick="right();" class="button6">→</a>
+        <a id="down" onclick="down();" class="button6">↓</a>
+
+
+    </div>
+    <script>
+        const ws = new WebSocket("ws://localhost:8083");
+
+        ws.addEventListener("open", () => {
+            console.log("connected");
+            ws.send("test");
+        });
+
+        ws.addEventListener("message", ({ data }) => {
+            console.log(data);
+        });
+
+        function up(){
+            ws.send("up");
+        }
+
+        function down(){
+            ws.send("down");
+        }
+
+        function left(){
+            ws.send("left");
+        }
+
+        function right(){
+            ws.send("right");
+        }
+    </script>
+</body>
+</html>
