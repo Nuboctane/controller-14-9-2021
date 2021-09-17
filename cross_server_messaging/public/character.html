@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>[~] game</title>
+</head>
+<body>
+
+    <div id="cube" class="" style="height: 50px; width: 50px; background-color: palevioletred; border-radius: 10px;"></div>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        var socket = io();
+        const cube =   document.getElementById("cube")
+        
+        socket.on('control', function(msg) {
+            var posLeft = cube.offsetLeft;
+            var posTop = cube.offsetTop;
+
+            if (msg == "up"){
+                console.log("up");
+             cube.style.marginTop  = (posTop-10)+"px";
+
+            }else if (msg == "down"){
+                console.log("down");
+                cube.style.marginTop  = (posTop+10)+"px";
+
+            }else if (msg == "left"){
+                console.log("left");
+                cube.style.marginLeft  = (posLeft-25)+"px";
+            }else if (msg == "right"){
+                console.log("right");
+                cube.style.marginLeft  = (posLeft+10)+"px";
+            }else if(msg < 101){
+                console.log("size: " + msg+"px * "+msg+"px");
+                cube.style.height = msg+"px";
+                cube.style.width = msg+"px";
+
+            }else{
+                console.log(msg);
+                cube.style.backgroundColor = msg
+            }
+         });
+
+    </script>
+
+</body>
+</html>
